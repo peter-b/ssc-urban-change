@@ -41,7 +41,7 @@ enum OutputMode {
 
 /* -------------------------------------------------------------------- */
 
-#define GETOPT_OPTIONS "c:hi:m:s"
+#define GETOPT_OPTIONS "c:hi:m:"
 
 struct option long_options[] =
   {
@@ -49,7 +49,6 @@ struct option long_options[] =
     {"help", 0, 0, 'h'},
     {"mode", 1, 0, 'm'},
     {"nan", 1, 0, 'i'},
-    {"smooth", 0, 0, 's'},
     {0, 0, 0, 0} /* Guard */
   };
 
@@ -65,7 +64,6 @@ usage (char *name, int status)
 "\n"
 "Options:\n"
 "  -m, --mode=MODE Set changemap rendering mode [ridgelines]\n"
-"  -s, --smooth    Smooth along ridge lines before evaluating change\n"
 "  -c, --class=CLASS  Set class label to use for detection [%i]\n"
 "  -i, --nan=VAL   Set non-finite input values to VAL [default 0]\n"
 "  -h, --help      Display this message and exit\n"
