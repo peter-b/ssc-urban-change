@@ -1,0 +1,80 @@
+.TH ridge-changemap 1 "May 7, 2013" "Surrey Space Centre" 1.0
+.SH NAME
+ridge-changemap - Ridge-based urban change map generator
+.SH SYNOPSIS
+.B ridge-changemap
+[\fIOPTION\fR ...] [\fB-m\fR \fIMODE\fR] \fICRDG\fR \fIPRE\fR
+\fIPOST\fR \fIOUTFILE\fR
+.SH DESCRIPTION
+.PP
+\fBridge-changemap\fR is a tool for generating change maps from SAR
+amplitude images, with a building-by-building level of detail.  It is
+designed for working with metre-resolution SAR images, such as those
+available from the TerraSAR-X and COSMO-SkyMed platforms in high
+resolution spotlight modes.  The algorithm and underlying change
+metric used by this tool are described in [BRETT2012].
+.PP
+The tool takes three inputs.  \fICRDG\fR must contain ridge line data,
+extracted using \fBridgetool\fR(1)'s `\fB-l\fR' mode, and usually
+classified using \fBridge-classarea\fR(1) to indentify features likely
+to be associated with buildings.  \fIPRE\fR must be the pre-event SAR
+image used to generate \fICRDG\fR, and \fIPOST\fR must be the
+corresponding post-event image, coregistered with \fIPRE\fR.  Both
+TIFF files must be in single-channel, 32-bit floating point format.
+.PP
+Output is generated in \fIOUTFILE\fR, depending on the selected
+\fIMODE\fR.  The output format is detected from the name of
+\fIOUTFILE\fR, and may either be Portable Document Format (PDF) or
+Portable Network Graphics (PNG).
+.SH MODES
+.PP The tool supports two rendering modes for the generated change map:
+.TP 8
+\fBridgelines\fR
+The curvilinear features from the ridge file are drawn as vectors,
+with each line segment coloured according to the level of change
+detected.  This is the default mode.
+.TP 8
+\fBridgemask\fR
+A raster image is created, and each pixel is coloured according to
+detected level of change only if intersected by a curvilinear feature.
+This is the approach described in [BRETT2012].
+.SH OPTIONS
+.TP 8
+\fB-m\fR, \fB--mode\fR=\fIMODE\fR
+Select the rendering mode used for generating the output image.  The
+possible \fIMODE\fRs are described above.
+.TP 8
+\fB-c\fR, \fB--class\fR=\fICLASS\fR
+For classified ridge data files, set the desired class label to
+\fICLASS\fR.  All curvilinear features without this class label is
+discarded.  If the ridge data file does not contain classified data,
+all data is used and this option has no effect.
+.TP 8
+\fB-i\fR, \fB--nan\fR=\fIVAL\fR
+Replace bad pixel values found in the input SAR images with
+\fIVAL\fR. Because some remote sensing image products contain
+non-finite or NaN pixel values, \fBridge-changemap\fR will replace
+these with a finite value before change map generation.  By default,
+the replacement value is 0.
+.TP 8
+\fB-h\fR, \fB--help\fR
+Print a help message.
+.SH REFERENCES
+.TP 8
+[BRETT2012]
+Brett, Peter T.B.; Guida, Raffaella, \fIGeometry-based SAR curvilinear
+feature selection for damage detection\fR, Synthetic Aperture Radar,
+2012. EUSAR. 9th European Conference on, pp.62,65, 23-26
+April 2012
+.SH AUTHOR
+Written by Peter TB Brett, Surrey Space Centre, University of Surrey,
+UK.
+.SH COPYRIGHT
+.PP
+Copyright \(co 2013 Peter TB Brett <p.brett@surrey.ac.uk>.  License
+GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.PP
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+.SH SEE ALSO
+\fBridgetool\fR(1), \fBridge-classarea\fR(1).

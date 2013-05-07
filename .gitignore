@@ -1,0 +1,17 @@
+*.o
+*.l?
+*.in
+*~
+#*#
+.deps
+Makefile
+aclocal.m4
+autom4te.cache
+build-tools
+config.h
+config.log
+config.status
+configure
+stamp-h1
+INSTALL
+ridge-changemap

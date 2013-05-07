@@ -1,0 +1,128 @@
+=========================================================
+ Surrey Space Centre urban change detection tool for SAR
+=========================================================
+
+Copyright (C) 2013 Peter Brett <p.brett@surrey.ac.uk>
+
+Introduction
+============
+
+This package provides a tool for urban change detection using
+curvilinear features extracted synthetic aperture radar (SAR) images,
+as part of research into detection of earthquake damage in urban
+areas.  It was developed at Surrey Space Centre at the University of
+Surrey in Guildford, UK.
+
+The algorithm used by the tool is described in:
+
+  Brett, Peter T.B. and Guida, Raffaella. "Geometry-based SAR
+  curvilinear feature selection for damage detection," Synthetic
+  Aperture Radar, 2012. EUSAR. 9th European Conference on, pages
+  62-65, 23-26 April 2012.
+
+Programs
+========
+
+This package provides a program called `ridge-changemap'.  It
+generates plots of detected change signatures, and requires three
+inputs.
+
+1) A set of curvilinear features in a ridge data file.  These are
+   extracted from a pre-event SAR image with `ridgetool' (available in
+   the `ssc-ridge-tools' package).  Usually, building-related features
+   will have been found by classifying the ridge data file, using one
+   of the tools in the `ssc-ridge-classifiers' package.
+
+2) A pre-event SAR image, as a 32-bit floating point TIFF file.
+
+3) A post-event SAR image, as a 32-bit floating point TIFF file.  This
+   must have been coregistered with the pre-event SAR image.
+
+There are two current output modes available.  The `ridgelines' mode
+draws curvilinear features as vectors coloured according to change
+level.  The `ridgemask' mode draws a raster image with pixels that lie
+under curvilinear features coloured according to change level (as
+described in the paper cited above).
+
+Installation and dependencies
+=============================
+
+Dependencies
+------------
+
+In order to compile and install the 'ssc-urban-change' package, you must
+have the following tools and libraries installed:
+
+ - A C compiler and standard library (GCC 4.7 or later and glibc are
+   recommended).
+
+ - The `pkg-config' tool for managing shared libraries.
+   <http://pkgconfig.freedesktop.org/>
+
+ - The 'ssc-ridge-tools' package.
+   <https://github.com/peter-b/ssc-ridge-tools>
+
+ - GTK+ (the Gimp Toolkit), version  2.10.0 or later.
+   <http://www.gtk.org/>
+
+ - Cairo vector graphics library, version 1.8.0 or later, with PNG,
+   PDF and SVG support available.
+   <http://www.cairographics.org/>
+
+ - LibTIFF.
+   <http://www.libtiff.org/>
+
+If you are compiling from the 'ssc-urban-change' git repository, you
+will also require:
+
+  - The `git' version control tool, version 1.6 or newer.
+    <http://git-scm.com/>
+
+  - GNU Automake, version 1.11.0 or newer.
+    <http://www.gnu.org/software/automake/>
+
+  - GNU Autoconf, version 2.60 or newer.
+    <http://www.gnu.org/software/autoconf/>
+
+  - GNU Libtool.  <http://www.gnu.org/software/libtool/>
+
+Configuration and compilation
+-----------------------------
+
+If you are building from git, clone the repository and set up the
+source tree:
+
+  git clone git://github.com/peter-b/ssc-urban-change.git
+  cd ssc-urban-change
+  ./autogen.sh
+
+Otherwise, extract the source files.
+
+You can then proceed to configure, compile and install the tools in
+the usual manner:
+
+  ./configure
+  make
+  make install
+
+For a full list of the options that can be passed to 'configure',
+please see:
+
+  ./configure --help
+
+License
+=======
+
+Surrey Space Centre urban change detection tool for SAR (this package)
+is freely distributable under the GNU Public License (GPL) version 3.0
+or (at your option) any later version.  See the `COPYING' file for the
+full text of the license.
+
+The programs and associated files are:
+
+  Copyright (C) 2013 Peter Brett <p.brett@surrey.ac.uk>
+
+..
+  Local Variables:
+  mode: text
+  End:
